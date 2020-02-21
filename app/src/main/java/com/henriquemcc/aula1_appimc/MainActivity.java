@@ -27,63 +27,74 @@ public class MainActivity extends AppCompatActivity
         TextView textoMensagem=findViewById(R.id.Mensagem);
 
         //Lendo o peso e a altura
-        float peso=Float.valueOf(entradaPeso.getText().toString());
-        float altura=Float.valueOf(entradaAltura.getText().toString());
+        float peso=0, altura=0;
+        boolean ocorreu_excecao_NumberFormatException=false;
+
+        try
+        {
+            peso=Float.valueOf(entradaPeso.getText().toString());
+            altura=Float.valueOf(entradaAltura.getText().toString());
+        }
+        catch(NumberFormatException e)
+        {
+            textoMensagem.setText("Uma exceção ocorreu: "+e.toString()+"\nNão foi digitado nenhum número.");
+            textoMensagem.setTextColor(Color.RED);
+            ocorreu_excecao_NumberFormatException=true;
+        }
 
         //Calculando o IMC e imprimindo
-        double imc=calcularIMC(peso, altura);
-        textoIMC.setText(String.valueOf(imc));
+        if(!ocorreu_excecao_NumberFormatException)
+        {
+            double imc=calcularIMC(peso, altura);
+            textoIMC.setText(String.valueOf(imc));
 
-        //Exibindo mensagem ao usuario
-        if(altura==0)
-        {
-            textoMensagem.setText("Erro: Não foi possível dividir: "+peso+"/("+altura+"*"+altura+").\nNão existe divisão por zero.");
-            textoMensagem.setTextColor(Color.RED);
+            //Exibindo mensagem ao usuario
+            if(altura==0)
+            {
+                textoMensagem.setText("Erro: Não foi possível dividir: "+peso+"/("+altura+"*"+altura+").\nNão existe divisão por zero.");
+                textoMensagem.setTextColor(Color.RED);
+            }
+            else if(imc<16)
+            {
+                textoMensagem.setText("IMC < 16 -> Magreza grave");
+                textoMensagem.setTextColor(Color.RED);
+            }
+            else if(imc>16 && imc<17)
+            {
+                textoMensagem.setText("16<IMC<17 -> Magreza moderada");
+                textoMensagem.setTextColor(Color.rgb(255, 165, 0));
+            }
+            else if(imc>17 && imc<18.5)
+            {
+                textoMensagem.setText("16<IMC<17 -> Magreza leve");
+                textoMensagem.setTextColor(Color.rgb(255, 165, 0));
+            }
+            else if(imc>18.5 && imc<25)
+            {
+                textoMensagem.setText("18,5<IMC<25 -> Saudável");
+                textoMensagem.setTextColor(Color.GREEN);
+            }
+            else if(imc>25 && imc<30)
+            {
+                textoMensagem.setText("25<IMC<30 -> Sobrepeso");
+                textoMensagem.setTextColor(Color.rgb(255, 165, 0));
+            }
+            else if(imc>30 && imc<35)
+            {
+                textoMensagem.setText("30<IMC<35 -> Obesidade Grau I");
+                textoMensagem.setTextColor(Color.RED);
+            }
+            else if(imc>35 && imc<40)
+            {
+                textoMensagem.setText("30<IMC<35 -> Obesidade Grau II (severa)");
+                textoMensagem.setTextColor(Color.RED);
+            }
+            else if(imc>40)
+            {
+                textoMensagem.setText("IMC>40 -> Obesidade Grau III (mórbida)");
+                textoMensagem.setTextColor(Color.RED);
+            }
         }
-        else if(imc<16)
-        {
-            textoMensagem.setText("IMC < 16 -> Magreza grave");
-            textoMensagem.setTextColor(Color.RED);
-        }
-        else if(imc>16 && imc<17)
-        {
-            textoMensagem.setText("16<IMC<17 -> Magreza moderada");
-            textoMensagem.setTextColor(Color.rgb(255, 165, 0));
-        }
-        else if(imc>17 && imc<18.5)
-        {
-            textoMensagem.setText("16<IMC<17 -> Magreza leve");
-            textoMensagem.setTextColor(Color.rgb(255, 165, 0));
-        }
-        else if(imc>18.5 && imc<25)
-        {
-            textoMensagem.setText("18,5<IMC<25 -> Saudável");
-            textoMensagem.setTextColor(Color.GREEN);
-        }
-        else if(imc>25 && imc<30)
-        {
-            textoMensagem.setText("25<IMC<30 -> Sobrepeso");
-            textoMensagem.setTextColor(Color.rgb(255, 165, 0));
-        }
-        else if(imc>30 && imc<35)
-        {
-            textoMensagem.setText("30<IMC<35 -> Obesidade Grau I");
-            textoMensagem.setTextColor(Color.RED);
-        }
-        else if(imc>35 && imc<40)
-        {
-            textoMensagem.setText("30<IMC<35 -> Obesidade Grau II (severa)");
-            textoMensagem.setTextColor(Color.RED);
-        }
-        else if(imc>40)
-        {
-            textoMensagem.setText("IMC>40 -> Obesidade Grau III (mórbida)");
-            textoMensagem.setTextColor(Color.RED);
-        }
-
-
-
-
     }
 
     public double calcularIMC(float peso, float altura)
