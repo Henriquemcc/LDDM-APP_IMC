@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
     }
 
+    /**
+     * Funcao do metodo: Este metodo serve para rodar o calculo do IMC tendo como entrada e saida a interface grafica.
+     * @param view
+     */
     public void interfaceGraficaCalcularIMC(View view)
     {
         //Criando instancias de entrada e saida de dados na tela do usuario
@@ -97,12 +101,16 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Funcao do metodo: Este metodo serve para calcular o IMC
+     * @param peso Peso da pessoa em kg.
+     * @param altura Altura da pessoa em cm.
+     * @return Indice de Massa Corporal.
+     */
     public double calcularIMC(float peso, float altura)
     {
         altura/=100;
         return peso/(altura*altura);
     }
-
-
 
 }
