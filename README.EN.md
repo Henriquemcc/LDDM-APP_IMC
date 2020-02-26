@@ -19,7 +19,7 @@ To run this app it is necessary to have a smartphone with Android version <b>Kit
 ## How to download and install
 To install this app:
 
-1- Download from ["Release"](https://github.com/Henriquemcc/LDDM-APP_IMC/releases) the file [app-debug.apk](https://github.com/Henriquemcc/LDDM-APP_IMC/releases/download/1-alpha/app-debug.apk) on your Android smartphone.
+1- Download from ["Release"](https://github.com/Henriquemcc/LDDM-APP_IMC/releases) the file [app-debug.apk](https://github.com/Henriquemcc/LDDM-APP_IMC/releases/download/2-alpha/app-debug.apk) on your Android smartphone.
 
 2- Enable installation of apps from unknown sources.
 
